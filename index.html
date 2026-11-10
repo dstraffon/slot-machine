@@ -668,7 +668,7 @@ function plateHtml({ fig, title, hint, readout = "", keys = [], caption, body })
     return `<figure class="iso-figure"><div class="iso-plate"><div class="iso-plate-corners" aria-hidden="true">${corner("fig", fig)}${title ? corner("title", title) : ""}${hint ? corner("hint", hint) : ""}${corner("readout", readout, " data-readout")}</div>${body}</div>${legend}</figure>`;
 }
 function pageHtml({ title, theme = "dark", body, script = "", width = 650 }) {
-    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escape(title)}</title><style>${ISO_CSS}${PAGE_CSS.replace("__WIDTH__", String(width))}</style></head><body class="iso" data-theme="${theme}"><main class="iso-page">${body}</main>${script ? `<script type="module">${script.replace(/<\/(script)/gi, "<\\/$1")}<\/script>` : ""}<script>(()=>{try{const m=matchMedia('(prefers-color-scheme: light)');const set=()=>document.querySelectorAll('.iso').forEach(e=>e.setAttribute('data-theme',m.matches?'light':'dark'));if(!false){set();m.addEventListener('change',set);}}catch(e){}})();</script></body></html>`;
+    return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${escape(title)}</title><style>${ISO_CSS}${PAGE_CSS.replace("__WIDTH__", String(width))}</style></head><body class="iso" data-theme="${theme}"><main class="iso-page">${body}</main>${script ? `<script type="module">${script.replace(/<\/(script)/gi, "<\\/$1")}<\/script>` : ""}</body></html>`;
 }
 const PAGE_CSS = `
 *{box-sizing:border-box}
@@ -971,4 +971,4 @@ stage.addEventListener("keydown", (event) => { if (event.key === " " || event.ke
 reels.forEach((reel) => drawReel(reel, 0));
 window.__slot = { reels, get result() { return result; } };
 say("pull the handle · 3 reels × 64 virtual stops");
-</script></body></html>
+</script><script>(()=>{try{const m=matchMedia('(prefers-color-scheme: light)');const set=()=>document.querySelectorAll('.iso').forEach(e=>e.setAttribute('data-theme',m.matches?'light':'dark'));if(!false){set();m.addEventListener('change',set);}}catch(e){}})();</script></body></html>
